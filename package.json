@@ -1,0 +1,23 @@
+{
+  "name": "google-map-js-api-experiments",
+  "version": "1.0.0",
+  "description": "for this examples you can use this key AIzaSyCYOdIlbcDDPtoRqaYg857AeXVwTP0xdvA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coding-jam/google-map-js-api-experiments.git"
+  },
+  "author": "",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/coding-jam/google-map-js-api-experiments/issues"
+  },
+  "homepage": "https://github.com/coding-jam/google-map-js-api-experiments#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect": "^3.2.1"
+  }
+}
