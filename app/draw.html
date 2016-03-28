@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Draw</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    #map {
+        height: 100%;
+    }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+
+    var COORDINATES = [{lat: 43.523302, lng: 13.244851},{lat: 44.523302, lng: 12.244851}];
+
+    window.MapExperiments = {
+        map:null,
+        line:[],
+        initMap:function() {
+            MapExperiments.map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 43.45302116583494, lng: 12.355504681250075},
+                zoom: 6,
+                disableDefaultUI:true
+            });
+
+            var mapPath = new google.maps.Polyline({
+                path: COORDINATES,
+                strokeColor: '#FF0000',
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+
+            mapPath.setMap(MapExperiments.map);
+        }
+    };
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYOdIlbcDDPtoRqaYg857AeXVwTP0xdvA&callback=MapExperiments.initMap"
+    async defer></script>
+</body>
+</html>
