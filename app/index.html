@@ -13,7 +13,7 @@
     #map {
         height: 100%;
     }
-    #button{
+    #buttonContainer{
         position: fixed;
         top: 10px;
         left: 10px;
@@ -22,10 +22,14 @@
 </head>
 <body>
     <div id="map"></div>
-    <button id="button" onclick="MapExperiments.changeMapType()">Change Map Type</button>
+    <div id="buttonContainer">
+        <button onclick="MapExperiments.changeMapType()">Change Map Type</button>
+        <button onclick="MapExperiments.moreZoom()">+</button>
+        <button onclick="MapExperiments.lessZoom()">-</button>
+    </div>
     <script>
     var map;
-    
+
     window.MapExperiments = {
         map:null,
         MAP_TYPES:null,
@@ -47,6 +51,14 @@
         },
         changeMapType:function(){
             MapExperiments.map.setMapTypeId(MapExperiments.MAP_TYPES[Math.floor(Math.random() * 4)]);
+        },
+        moreZoom:function(){
+            var zoom = MapExperiments.map.getZoom() + 1;
+            MapExperiments.map.setZoom(zoom);
+        },
+        lessZoom:function(){
+            var zoom = MapExperiments.map.getZoom() - 1;
+            MapExperiments.map.setZoom(zoom);
         }
     };
 
