@@ -23,32 +23,46 @@
 <body>
     <div id="map"></div>
     <div id="buttonContainer">
-        <button onclick="MapExperiments.addMarker()">Add Marker</button>
-        <button onclick="MapExperiments.removeMarker()">Remove Marker</button>
+        <button onclick="MapExperiments.addMarkers()">Add Marker</button>
+        <button onclick="MapExperiments.removeMarkers()">Remove Marker</button>
     </div>
     <script>
+
+    var MARKERS_DATA = [{
+        position: {lat: 43.523302, lng: 13.244851},
+        title: "Strazz"
+    }];
+
     window.MapExperiments = {
         map:null,
-        marker:null,
+        markers:[],
         initMap:function() {
             MapExperiments.map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 43.307295, lng: 13.3003289},
-                zoom: 8,
-                disableDefaultUI:true,
-                mapTypeId:google.maps.MapTypeId.SATELLITE
+                center: {lat: 43.45302116583494, lng: 12.355504681250075},
+                zoom: 6,
+                disableDefaultUI:true
             });
         },
-        addMarker:function(){
-            MapExperiments.marker = new google.maps.Marker({
-                position: {lat: 43.307295, lng: 13.3003289},
-                map: MapExperiments.map,
-                title: 'My First Marker'
-            });
+        addMarkers:function(){
+            if(!MapExperiments.markers.length){
+                MapExperiments.markers = MARKERS_DATA.map(function(m){
+                    return new google.maps.Marker({
+                        position: m.position,
+                        map: MapExperiments.map,
+                        animation: google.maps.Animation.DROP,
+                        title: m.title,
+                        icon:'http://codingjam.it/wp-content/uploads/2016/03/codingjam-jar-icon.png'
+                    })
+                });
+            }
         },
-        removeMarker:function(){
-            if(MapExperiments.marker){
-                MapExperiments.marker.setMap(null);
-                MapExperiments.marker = null;
+        removeMarkers:function(){
+            if(MapExperiments.markers.length){
+                MapExperiments.markers.forEach(function(m){
+                    m.setMap(null);
+                });
+
+                MapExperiments.markers = [];
             }
         }
     };
