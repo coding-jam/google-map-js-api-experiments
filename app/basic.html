@@ -28,8 +28,6 @@
         <button onclick="MapExperiments.lessZoom()">-</button>
     </div>
     <script>
-    var map;
-
     window.MapExperiments = {
         map:null,
         MAP_TYPES:null,
@@ -47,11 +45,6 @@
                 zoom: 8,
                 disableDefaultUI:true,
                 mapTypeId:google.maps.MapTypeId.SATELLITE
-            });
-
-            MapExperiments.map.addListener('center_changed', function() {
-                var center = MapExperiments.map.getCenter();
-                console.log(center.lat(),center.lng());
             });
         },
         changeMapType:function(){
