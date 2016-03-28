@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    #map {
+        height: 100%;
+    }
+    #buttonContainer{
+        position: fixed;
+        top: 10px;
+        left: 10px;
+    }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="buttonContainer">
+        <button onclick="MapExperiments.changeMapType()">Change Map Type</button>
+        <button onclick="MapExperiments.moreZoom()">+</button>
+        <button onclick="MapExperiments.lessZoom()">-</button>
+    </div>
+    <script>
+    var map;
+
+    window.MapExperiments = {
+        map:null,
+        MAP_TYPES:null,
+        initMap:function() {
+
+            MapExperiments.MAP_TYPES = [
+                google.maps.MapTypeId.SATELLITE,
+                google.maps.MapTypeId.TERRAIN,
+                google.maps.MapTypeId.ROADMAP,
+                google.maps.MapTypeId.HYBRID
+            ];
+
+            MapExperiments.map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 43.307295, lng: 13.3003289},
+                zoom: 8,
+                disableDefaultUI:true,
+                mapTypeId:google.maps.MapTypeId.SATELLITE
+            });
+
+            MapExperiments.map.addListener('center_changed', function() {
+                var center = MapExperiments.map.getCenter();
+                console.log(center.lat(),center.lng());
+            });
+        },
+        changeMapType:function(){
+            MapExperiments.map.setMapTypeId(MapExperiments.MAP_TYPES[Math.floor(Math.random() * 4)]);
+        },
+        moreZoom:function(){
+            var zoom = MapExperiments.map.getZoom() + 1;
+            MapExperiments.map.setZoom(zoom);
+        },
+        lessZoom:function(){
+            var zoom = MapExperiments.map.getZoom() - 1;
+            MapExperiments.map.setZoom(zoom);
+        }
+    };
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYOdIlbcDDPtoRqaYg857AeXVwTP0xdvA&callback=MapExperiments.initMap"
+    async defer></script>
+</body>
+</html>
