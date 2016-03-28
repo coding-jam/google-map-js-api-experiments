@@ -48,6 +48,11 @@
                 disableDefaultUI:true,
                 mapTypeId:google.maps.MapTypeId.SATELLITE
             });
+
+            MapExperiments.map.addListener('center_changed', function() {
+                var center = MapExperiments.map.getCenter();
+                console.log(center.lat(),center.lng());
+            });
         },
         changeMapType:function(){
             MapExperiments.map.setMapTypeId(MapExperiments.MAP_TYPES[Math.floor(Math.random() * 4)]);
