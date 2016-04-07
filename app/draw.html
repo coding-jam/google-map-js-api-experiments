@@ -19,7 +19,13 @@
     <div id="map"></div>
     <script>
 
-    var COORDINATES = [{lat: 43.88907, lng: 11.09802},{lat: 44.523302, lng: 12.244851}];
+    var COORDINATES = [
+        {lat: 43.88907, lng: 11.09802},
+        {lat: 43.8665949, lng: 11.1561196},
+        {lat: 43.523302, lng: 13.244851},
+        {lat: 45.9676902, lng: 12.5666159},
+        {lat: 43.88907, lng: 11.09802}
+    ];
 
     window.MapExperiments = {
         map:null,
@@ -31,7 +37,7 @@
                 disableDefaultUI:true
             });
 
-            var mapPath = new google.maps.Polyline({
+            var mapPath = new google.maps.Polygon({
                 path: COORDINATES,
                 strokeColor: '#FF0000',
                 strokeOpacity: 1.0,
