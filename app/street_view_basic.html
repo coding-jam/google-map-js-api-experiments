@@ -41,6 +41,7 @@
         panorama:null,
         initMap:function() {
             MapExperiments.panorama = new google.maps.StreetViewPanorama(document.getElementById('panorama'), {
+                disableDefaultUI:true,
                 position: COORDINATES[this.currentPositionIndex],
                 pov:{
                     heading:0,
