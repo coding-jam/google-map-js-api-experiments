@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    #panorama {
+        height: 100%;
+    }
+    #buttonContainer{
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+    }
+    </style>
+</head>
+<body>
+    <div id="panorama"></div>
+    <div id="buttonContainer">
+        <button onclick="MapExperiments.turnLeft()">Turn left</button>
+        <button onclick="MapExperiments.turnRight()">Turn Right</button>
+    </div>
+    <script>
+    window.MapExperiments = {
+        panorama:null,
+        initMap:function() {
+            MapExperiments.panorama = new google.maps.StreetViewPanorama(document.getElementById('panorama'), {
+                position: {lat: 42.345573, lng: -71.098326},
+                pov:{
+                    heading:0,
+                    pitch:0
+                }
+            });
+        },
+        turnLeft:function(){
+            var pov = MapExperiments.panorama.getPov();
+            pov.heading -= 90;
+            MapExperiments.panorama.setPov(pov);
+        },
+        turnRight:function(){
+            var pov = MapExperiments.panorama.getPov();
+            pov.heading += 90;
+            MapExperiments.panorama.setPov(pov);
+        }
+    };
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYOdIlbcDDPtoRqaYg857AeXVwTP0xdvA&callback=MapExperiments.initMap" async defer></script>
+</body>
+</html>
