@@ -25,13 +25,23 @@
     <div id="buttonContainer">
         <button onclick="MapExperiments.turnLeft()">Turn left</button>
         <button onclick="MapExperiments.turnRight()">Turn Right</button>
+        <button onclick="MapExperiments.nextLocation()">Next Location</button>
+        <button onclick="MapExperiments.previousLocation()">Previous Location</button>
     </div>
     <script>
+
+    var COORDINATES = [
+        {lat: 43.88907, lng: 11.09802},
+        {lat: 43.8665949, lng: 11.1561196},
+        {lat: 43.523302, lng: 13.244851}
+    ];
+
     window.MapExperiments = {
+        currentPositionIndex:0,
         panorama:null,
         initMap:function() {
             MapExperiments.panorama = new google.maps.StreetViewPanorama(document.getElementById('panorama'), {
-                position: {lat: 42.345573, lng: -71.098326},
+                position: COORDINATES[this.currentPositionIndex],
                 pov:{
                     heading:0,
                     pitch:0
@@ -47,6 +57,20 @@
             var pov = MapExperiments.panorama.getPov();
             pov.heading += 90;
             MapExperiments.panorama.setPov(pov);
+        },
+        nextLocation:function(){
+            this.currentPositionIndex++;
+            if(this.currentPositionIndex === COORDINATES.length){
+                this.currentPositionIndex = 0;
+            }
+            MapExperiments.panorama.setPosition(COORDINATES[this.currentPositionIndex]);
+        },
+        previousLocation:function(){
+            this.currentPositionIndex--;
+            if(this.currentPositionIndex < 0){
+                this.currentPositionIndex = COORDINATES.length - 1;
+            }
+            MapExperiments.panorama.setPosition(COORDINATES[this.currentPositionIndex]);
         }
     };
 
