@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StreetView - Map integration</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    #map {
+        height: 100%;
+    }
+    #buttonContainer{
+        position: fixed;
+        top: 10px;
+        left: 10px;
+    }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="buttonContainer">
+        <button onclick="MapExperiments.toggle()">Toggle Street view</button>
+    </div>
+    <script>
+
+    var JESI = {lat: 43.523302, lng: 13.244851};
+
+    window.MapExperiments = {
+        showPanorama:false,
+        panorama:null,
+        map:null,
+        initMap:function() {
+
+            MapExperiments.map = new google.maps.Map(document.getElementById('map'), {
+                center: JESI,
+                zoom: 15
+            });
+
+            var colosseoMarker = new google.maps.Marker({
+                position: JESI,
+                map: MapExperiments.map
+            });
+
+            MapExperiments.panorama = MapExperiments.map.getStreetView();
+            MapExperiments.panorama.setPosition(JESI);
+        },
+        toggle:function(){
+            MapExperiments.showPanorama = !MapExperiments.showPanorama;
+            MapExperiments.panorama.setVisible(MapExperiments.showPanorama);
+        }
+    };
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYOdIlbcDDPtoRqaYg857AeXVwTP0xdvA&callback=MapExperiments.initMap" async defer></script>
+</body>
+</html>
