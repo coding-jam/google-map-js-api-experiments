@@ -4,7 +4,8 @@
   "description": "for this examples you can use this key AIzaSyCYOdIlbcDDPtoRqaYg857AeXVwTP0xdvA",
   "main": "index.js",
   "scripts": {
-    "start": "gulp", 
+    "prestart": "npm install",
+    "start": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
